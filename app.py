@@ -116,12 +116,12 @@ entry_cargo.grid(row=3, column=1, padx=10, pady=10)
 entry_admissao = tk.Entry(window, width =35)
 entry_admissao.grid(row=4, column=1, padx=10, pady=10)
 
-# Botão de Cadastrar
+#=======================================================#
 
 botao_cadastrar = tk.Button(text='Cadastrar Funcionário', command=cadastrarFuncionario)
 botao_cadastrar.grid(row=5, column=0,columnspan=2, pady=5, ipadx = 40)
 
-# Botão de Excluir
+#=======================================================#
 
 botao_descadastrar = tk.Button(text='Descadastrar Funcionário (preencher somente o campo de cpf)', command=deletarFuncionario)
 botao_descadastrar.grid(row=6, column=0,columnspan=2, pady=5, ipadx = 30)
