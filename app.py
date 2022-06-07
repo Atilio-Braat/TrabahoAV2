@@ -34,6 +34,7 @@ def cadastrarFuncionario():
         return
 
     funcionario.insertFuncionario()
+    mostrarFuncionario()
 
     apagarCampos()
     
@@ -43,8 +44,19 @@ def deletarFuncionario():
 
     funcionario.cpf = entry_cpf.get()
     funcionario.deletarFuncionario()
+    mostrarFuncionario()
 
     apagarCampos()
+
+def mostrarFuncionario():
+    funcionario = Funcionario()
+    funcionarios = funcionario.buscarFuncionario()
+    lista_funcionarios.delete(0, tk.END)
+    for i in funcionarios:
+        lista_funcionarios.insert(tk.END, i)
+
+    lista_funcionarios.config(yscrollcommand=scroll_funcionarios.set)
+    scroll_funcionarios.config(command=lista_funcionarios.yview)
 
 def apagarCampos():
     entry_nome.delete(0, tk.END)
@@ -116,11 +128,5 @@ botao_descadastrar.grid(row=6, column=0,columnspan=2, pady=5, ipadx = 30)
 
 #=======================================================#
 
-for i in range (100):
-    lista_funcionarios.insert(tk.END, i)
-    
-lista_funcionarios.config(yscrollcommand=scroll_funcionarios.set)
-scroll_funcionarios.config(command=lista_funcionarios.yview)
-
-
+mostrarFuncionario()
 window.mainloop()

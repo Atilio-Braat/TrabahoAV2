@@ -21,7 +21,7 @@ class Funcionario(object):
 
         query = """
         INSERT INTO funcionario (nome, cargo, cpf,
-        entrada, idade) VALUES ('%s', '%s', %d, '%s', %d)
+        entrada, idade) VALUES ('%s', '%s', %d, '%s', %d);
         """ % (self.nome,self.cargo,int(self.cpf),self.entrada,int(self.idade))
         c.execute(query)
 
@@ -33,10 +33,11 @@ class Funcionario(object):
 
         c = db.cursor()
         
-        c.execute("""
+        query = """
         DELETE FROM funcionario 
-        WHERE id = %d
-        """.format(self.id))
+        WHERE cpf = %d;
+        """ % (int(self.cpf))
+        c.execute(query)
         c.close()
     
     def buscarFuncionario(self):
@@ -48,10 +49,11 @@ class Funcionario(object):
             id,
             nome,
             idade,
-            cargo,
             cpf,
+            cargo,
             entrada
-        """.format(self.id))
+        FROM funcionario;
+        """).fetchall()
         c.close()
 
         return query
