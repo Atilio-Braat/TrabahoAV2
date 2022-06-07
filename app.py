@@ -59,6 +59,11 @@ def apagarCampos():
     entry_admissao.config(highlightbackground="gray")
 
 window = tk.Tk()
+window.geometry("750x575")
+window.title("Cadastro de Funcionários")
+
+
+#=======================================================#
 
 label_nome = tk.Label(window, text='Nome')
 label_nome.grid(row=0,column=0, padx=10, pady=10)
@@ -66,7 +71,7 @@ label_nome.grid(row=0,column=0, padx=10, pady=10)
 label_idade = tk.Label(window, text='Idade')
 label_idade.grid(row=1, column=0, padx=10, pady=10)
 
-label_cpf = tk.Label(window, text='Telefone')
+label_cpf = tk.Label(window, text='CPF')
 label_cpf.grid(row=2, column=0, padx=10, pady=10)
 
 label_cargo = tk.Label(window, text='Cargo')
@@ -75,8 +80,15 @@ label_cargo.grid(row=3, column=0, padx=10, pady=10)
 label_admissao = tk.Label(window, text='Admissão')
 label_admissao.grid(row=4, column=0 , padx=10, pady=10)
 
+#=======================================================#
 
-#Caixas Entradas:
+scroll_funcionarios = tk.Scrollbar(window)
+
+lista_funcionarios = tk.Listbox(window, relief=tk.SOLID, border=1, width=30, height=25, font=("Gentium Basic", 11))
+lista_funcionarios.grid(row=0, column=6, rowspan=10, padx=5, pady=15, ipadx=40)
+
+#=======================================================#
+
 entry_nome = tk.Entry(window , width =35)
 entry_nome.grid(row=0,column=1, padx=10, pady=10)
 
@@ -101,6 +113,14 @@ botao_cadastrar.grid(row=5, column=0,columnspan=2, pady=5, ipadx = 40)
 
 botao_descadastrar = tk.Button(text='Descadastrar Funcionário (preencher somente o campo de cpf)', command=deletarFuncionario)
 botao_descadastrar.grid(row=6, column=0,columnspan=2, pady=5, ipadx = 30)
+
+#=======================================================#
+
+for i in range (100):
+    lista_funcionarios.insert(tk.END, i)
+    
+lista_funcionarios.config(yscrollcommand=scroll_funcionarios.set)
+scroll_funcionarios.config(command=lista_funcionarios.yview)
 
 
 window.mainloop()
