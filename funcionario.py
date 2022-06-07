@@ -1,69 +1,59 @@
 import sqlite3
 
-class Funsionario(object):
+class Funcionario(object):
 
-    def init(self, id = 0, nome = "", cargo = "", cep = "", entrada = "", idade = 0):
+    def init(self, id = 0, nome = "", cargo = "", cpf = "", entrada = "", idade = 0):
         self.info = {}
         self.id = id
         self.nome = nome
         self.cargo = cargo
-        self.cep = cep
+        self.cpf = cpf
         self.entrada = entrada
         self.idade = idade
 
 
-    def insertUser(self):
+    def insertFuncionario(self):
 
         db = sqlite3.connect('database.db')
 
         c = db.cursor()
-        try:
 
-            c.execute("""
-            INSERT INTO funcionario (nome, cargo, cep,
-            entrada, idade) VALUES (%s, %s, %d, %s, %s)
-            """.format(self.nome,self.cargo,self.cep,self.entrada,self.idade))
 
-            db.commit()
-            c.close()
+        query = """
+        INSERT INTO funcionario (nome, cargo, cpf,
+        entrada, idade) VALUES ('%s', '%s', %d, '%s', %d)
+        """ % (self.nome,self.cargo,int(self.cpf),self.entrada,int(self.idade))
+        c.execute(query)
 
-            return "Funcionário cadastrado com sucesso!"
-        except:
-            return "Ocorreu um erro na inserção do funcionário"
+        db.commit()
+        c.close()
 
-    def deleteUser(self):
+    def deletarFuncionario(self):
         db = sqlite3.connect('database.db')
 
         c = db.cursor()
         
-        try:
-            c.execute("""
-            DELETE FROM funcionario 
-            WHERE id = %d
-            """.format(self.id))
-
-            return "Funcionário deletado"
-        except:
-            return "Ocorreu um erro ao deletar"
+        c.execute("""
+        DELETE FROM funcionario 
+        WHERE id = %d
+        """.format(self.id))
+        c.close()
     
     def buscarFuncionario(self):
         db = sqlite3.connect('database.db')
 
         c = db.cursor()
-        try:
-            c.execute("""
-            SELECT 
-                id,
-                nome,
-                idade,
-                cargo,
-                cep,
-                entrada
-            WHERE id = %d
-            """.format(self.id))
+        query = c.execute("""
+        SELECT 
+            id,
+            nome,
+            idade,
+            cargo,
+            cpf,
+            entrada
+        """.format(self.id))
+        c.close()
 
-            return "Busca feita com sucesso"
-        except:
-            return "Ocorreu um erro na busca"
+        return query
 
     

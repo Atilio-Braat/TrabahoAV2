@@ -4,13 +4,13 @@ db = sqlite3.connect('database.db')
 
 c = db.cursor()
 
-c.execute("""create table if not exists funcionario (
-            id integer primary key autoincrement ,
-            nome text,
-            cargo text,
-            cep text,
-            entrada date,
-            idade integer)""")
+c.execute("""CREATE TABLE IF NOT EXISTS funcionario (
+            id INTEGER PRIMARY KEY AUTOINCREMENT ,
+            nome TEXT,
+            cargo TEXT,
+            cpf INTEGER,
+            entrada TEXT,
+            idade INTEGER)""")
 
 db.commit()
 
