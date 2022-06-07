@@ -38,6 +38,7 @@ class Funcionario(object):
         WHERE cpf = %d;
         """ % (int(self.cpf))
         c.execute(query)
+        db.commit()
         c.close()
     
     def buscarFuncionario(self):
